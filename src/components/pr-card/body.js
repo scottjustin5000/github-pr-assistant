@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  padding: 1rem;
-  padding-top: 4rem;
+  padding-top: 1rem;
 `
 const Name = styled.div`
   display: flex;
@@ -29,7 +28,7 @@ const Body = (props) => {
       <Title>
         {props.title}
       </Title>
-      {this.props.children}
+      {props.children}
     </Wrapper>
   )
 }

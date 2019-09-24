@@ -1,2 +1,2 @@
 # github-pr-assistant
- very specific github or helper
+ very specific github pull request assignment helper

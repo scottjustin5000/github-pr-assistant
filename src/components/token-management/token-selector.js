@@ -146,40 +146,24 @@ const TokenSelector =(props) => {
     return () => {
       document.removeEventListener('mousedown', onDocumentClick)
     }
-  },[])
-/*
- <div className='item-wrapper'>
-                <div className='item-name'>{item.name} {item.selected && <FontAwesome name='check' style={{color: '#fff'}} />}</div>
-                { this.props.showControls && <div className='item-control-wrapper'>
-                  <div className='item-control-button' onClick={(e) => this.onEdit(e, item)}><FontAwesome name='edit' style={{color: '#ffffff'}} /> </div>
-                  <div className='item-control-button' onClick={(e) => this.onDelete(e, item)}><FontAwesome name='trash-o' style={{color: '#ffffff'}} /></div>
-                </div>
-                }
-              </div>
+  },[open])
 
-              .item-wrapper {
-  display: inline-block;
-  width: 100%;
-  cursor: pointer;
-}
+  const selectItem = (item) => {
+    props.selectItem(item)
+    setOpen(false)
+  }
 
-.item-name {
-  width: 50%;
-  display: inline-block;
-  text-align: left;
-}
+  const onEditClick = (e, item) => {
+    props.onEditClick(e,item)
+    setOpen(false)
+  }
 
-.item-control-wrapper {
-  width: 50%; 
-  display: inline-block;
-}
+  const onDeleteClick = (e,name) => {
+    props.onDeleteClick(e,name)
+    setOpen(false)
+  }
 
-.item-control-button {
-  width: 50%; 
-  cursor: pointer;
-  display: inline-block;
-}
-*/
+
 return (
   <DropDownWrapper ref={inputEl}>
     <DropDownHeader onClick={()=> {setOpen(!open)}}>
@@ -189,14 +173,14 @@ return (
       <DropDownList open={open} count={props.items ? props.items.length : 0}>
         { props.items.map((item, i) => {
           return ( 
-          <DropDownListItem key={'ddl-{i}'}  onClick={() => props.selectItem(item)}>
+          <DropDownListItem key={`ddl-${i}`}  onClick={() => selectItem(item)}>
             <ItemWrapper>
               <ItemName>
               {item.name}
               </ItemName>
               <ItemControlWrapper>
-              <ItemControlButton><FontAwesomeIcon icon={faEdit}/></ItemControlButton>
-              <ItemControlButton><FontAwesomeIcon icon={faTrash}/></ItemControlButton>
+              <ItemControlButton onClick={(e)=> {onEditClick(e,item)}}><FontAwesomeIcon icon={faEdit}/></ItemControlButton>
+              <ItemControlButton onClick={(e)=> {onDeleteClick(e,item.name)}}><FontAwesomeIcon icon={faTrash}/></ItemControlButton>
               </ItemControlWrapper>
             </ItemWrapper>
           </DropDownListItem>)

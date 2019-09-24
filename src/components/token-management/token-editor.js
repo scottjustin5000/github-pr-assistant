@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef  } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const ModalWrapper = styled.div`
@@ -53,10 +53,22 @@ border: ${props=> props.border};
 } 
 `
 
-const TokenEditor = (props) => {
-const saveToken = () => {
+const ButtonWrapper = styled.div`
+width:90%;
+display: flex; 
+justify-content:flex-end;
+padding-top:20px;
+`
 
-}
+const TokenWrapper = styled.div`
+width: 100%; 
+display: flex;
+justify-content:center;
+padding-top:20px;
+`
+
+const TokenEditor = (props) => {
+
 const onTokenNameChange =(val) => {
   props.onTokenChanged('name', val.target.value)
 }
@@ -64,9 +76,12 @@ const onUserNameChange = (val) => {
   props.onTokenChanged('userName', val.target.value)
 }
 const onTokenChange = (val) => {
-  props.onTokenChanged('token', val.target.value)
+  props.onTokenChanged('value', val.target.value)
 }
 
+const onOwnerChange =(val) => {
+  props.onTokenChanged('owner', val.target.value)
+}
   return(
     <ModalWrapper show={props.show}>
       <MainModal>
@@ -74,19 +89,21 @@ const onTokenChange = (val) => {
       GitHub API Configuration
       </ConfigRow>
         <ConfigRow>
-        <NameTextBox placeholder=' Token Name' onChange={onTokenNameChange} value={props.name}/>
+        <NameTextBox placeholder=' Token Name' onChange={onTokenNameChange} value={props.token.name}/>
         </ConfigRow>
         <ConfigRow>
-        <NameTextBox placeholder=' User Name' onChange={onUserNameChange} value={props.userName}/>
+        <NameTextBox placeholder=' Owner' onChange={onOwnerChange} value={(props.token.owner||'')}/>
         </ConfigRow>
-        <div style={{width:"100%", display:"flex", justifyContent:'center', paddingTop:'20px'}}>
-        <NameTextBox placeholder=' Token' onChange={onTokenChange} value={props.token}/>
-        </div>
-        <div style={{width:'90%', display:"flex", justifyContent:'flex-end', paddingTop:'20px'}}>
+        <ConfigRow>
+        <NameTextBox placeholder=' User Name' onChange={onUserNameChange} value={props.token.userName}/>
+        </ConfigRow>
+       <TokenWrapper>
+        <NameTextBox placeholder=' Token' onChange={onTokenChange} value={props.token.value}/>
+        </TokenWrapper>
+       <ButtonWrapper>
       <ConfigButton background='#ffffff' border='solid 1px #dfdfdf' onClick={props.onCancel}>CANCEL</ConfigButton>
-      <div style={{width:'5px'}}></div>
       <ConfigButton background='#6cc644' color='#ffffff' border='none' onClick={props.onSubmit}>SUBMIT</ConfigButton>
-    </div>
+      </ButtonWrapper>
       </MainModal>
     </ModalWrapper>
   )

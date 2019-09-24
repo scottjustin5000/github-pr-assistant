@@ -1,28 +1,12 @@
 import React from 'react'
+import styled from 'styled-components'
 
-
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  render() {
-    let {
-      className
-    } = this.props;
-    return (
-      <div className={classnames("card", className)}>
-	{this.props.children}
-      </div>
-    );
-  }
-}
 const CardWrapper = styled.div`
 position: relative;
   max-width: 100%;
-  width: 250px;
-  min-width: 250px;
-  min-height: 350px;
+  width: 220px;
+  min-width: 220px;
+  min-height: 200px;
   display: flex;
   flex-flow: column;
   background-color: #ecf0f1;
@@ -38,7 +22,11 @@ position: relative;
 `
 
 const Card = (props) => {
-
+  return (
+    <CardWrapper>
+      { props.children }
+    </CardWrapper>
+  )
 }
 
 export default Card

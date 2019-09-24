@@ -1,0 +1,51 @@
+{
+  "name": "pr-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "./",
+  "main": "public/electron.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
+    "@fortawesome/free-solid-svg-icons": "^5.10.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "bluebird": "^3.5.5",
+    "font-awesome": "^4.7.0",
+    "keytar": "^4.4.1",
+    "node-fetch": "^2.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-fontawesome": "^1.6.1",
+    "react-scripts": "^3.1.1",
+    "styled-components": "^4.3.2"
+  },
+  "scripts": {
+    "react-start": "react-scripts start",
+    "electron-start": "ELECTRON_DEV=1 electron .",
+    "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:5000/ && npm run electron-start\"",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "pack": "electron-builder --dir",
+    "dist": "npx build --x64 --macos --win --linux --c.extraMetadata.main=build/electron.js -p always",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "react-scripts build && electron-builder --dir"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "electron": "^4.0.4",
+    "electron-builder": "^20.18.0",
+    "electron-rebuild": "^1.8.4",
+    "install": "^0.12.2",
+    "npm": "^6.8.0",
+    "typescript": "^3.4.2",
+    "wait-on": "^3.2.0"
+  }
+}

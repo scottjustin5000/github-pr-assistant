@@ -31,26 +31,19 @@ const StatName = styled.div`
   color: #7f8c8d;
 `
 const Stats = (props) => {
-
-  
-    return (
-      <StatsWrapper>
-	{
-	  stats.map((stat, i) => {
+  return (
+    <StatsWrapper>
+      { props.stats.map((stat, i) => {
 	    return (
-      <StatsContainer key={`stat-container-${i}`}>
-        <StatValue>
-          {stat.value}
-        </StatValue>
-          <StatName>
-          {stat.name}
-        </StatName>`
-	    </StatsContainer>
+  <StatsContainer key={`stat-container-${i}`}>
+            <StatValue>{stat.value}</StatValue>
+            <StatName>{stat.name}</StatName>`
+          </StatsContainer>
 	    )
 	  })
-	}
-      </StatsWrapper>
-    )
-  }
+      }
+    </StatsWrapper>
+  )
+}
 
-export default Stats;
+export default Stats

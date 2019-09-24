@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 const Header = styled.div`
   position: relative;
   display: flex;
@@ -9,7 +8,7 @@ const Header = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0.25rem 0.25rem 0 0;
-  background-image: ${props => props.url ? `url(${props.src})` : ``};
+  background-image: ${props => props.src ? `url(${props.src})` : ``};
  `
 
 export default Header

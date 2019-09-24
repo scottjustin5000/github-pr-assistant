@@ -12,7 +12,7 @@ const Avatar = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 100%;
-  background-image: ${props => props.url ? `url(${props.src})` : ``};
+  background-image: ${props => props.src ? `url(${props.src})` : ``};
  `
 
 export default Avatar
