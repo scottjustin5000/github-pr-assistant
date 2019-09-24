@@ -2,7 +2,7 @@ const keytar = window.remote ? window.remote.require('keytar') : require('keytar
 
 const findPassword = (item) => {
   if (keytar && keytar.getPassword) {
-    return keytar.getPassword('github-assistant', item.name)
+    return keytar.getPassword('githubassistant', item.name).catch((err) => { console.log(err) })
   }
 }
 
@@ -22,7 +22,6 @@ const loadTokens = async () => {
     let value = await findPassword(token)
     token.value = value
   }
-  console.log(tokens)
   return tokens
 }
 
@@ -37,7 +36,7 @@ const saveToken = (settings) => {
     const value = settings.value
     const key = settings.name
 
-    keytar.setPassword('github-assistant', key, value)
+    keytar.setPassword('githubassistant', key, value)
     settings = Object.assign({}, settings, { value: undefined })
   }
   const tokens = getTokens()
@@ -45,11 +44,11 @@ const saveToken = (settings) => {
   window.localStorage.setItem('tokens', JSON.stringify(tokens))
 }
 
-const editToken = (settings) => {
+const editToken = async (settings) => {
   if (settings.value) {
     const value = settings.value
     const key = settings.name
-    keytar.setPassword('github-assistant', key, value)
+    await keytar.setPassword('githubassistant', key, value)
     settings = Object.assign({}, settings, { value: undefined })
   }
   const tokens = getTokens()

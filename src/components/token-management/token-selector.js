@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef  } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-
 
 const Arrow = styled.span`
 width: 13px;
@@ -90,7 +89,7 @@ const DropDownList = styled.div`
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   box-shadow: ${props => props.open ? '0 5px 8px -1px #e8e8e8' : ''}
-  height: ${props => props.open ?  props.length * 36 +'px' : 0};
+  height: ${props => props.open ? props.length * 36 + 'px' : 0};
   visibility: ${props => !props.open ? 'hidden' : 'visible'};
   transform:  ${props => props.open ? 'scaleY(1)' : 'scaleY(0)'};
   transition: transform 200ms ease-in-out;
@@ -126,27 +125,26 @@ const ItemControlButton = styled.div`
   display: inline-block;
 `
 
-const TokenSelector =(props) => {
-
+const TokenSelector = (props) => {
   const [open, setOpen] = useState(false)
   const inputEl = useRef(null)
 
   const onDocumentClick = (e) => {
-    if (inputEl.current.contains(e.target)) return;
+    if (inputEl.current.contains(e.target)) return
     setOpen(false)
   }
 
   useEffect(() => {
     if (open) {
-      document.addEventListener("mousedown", onDocumentClick);
+      document.addEventListener('mousedown', onDocumentClick)
     } else {
-      document.removeEventListener("mousedown", onDocumentClick);
+      document.removeEventListener('mousedown', onDocumentClick)
     }
 
     return () => {
       document.removeEventListener('mousedown', onDocumentClick)
     }
-  },[open])
+  }, [open])
 
   const selectItem = (item) => {
     props.selectItem(item)
@@ -154,41 +152,40 @@ const TokenSelector =(props) => {
   }
 
   const onEditClick = (e, item) => {
-    props.onEditClick(e,item)
+    props.onEditClick(e, item)
     setOpen(false)
   }
 
-  const onDeleteClick = (e,name) => {
-    props.onDeleteClick(e,name)
+  const onDeleteClick = (e, name) => {
+    props.onDeleteClick(e, name)
     setOpen(false)
   }
 
-
-return (
-  <DropDownWrapper ref={inputEl}>
-    <DropDownHeader onClick={()=> {setOpen(!open)}}>
-      <HeaderTitle>{props.header}</HeaderTitle>
-      <Arrow open={open} />
+  return (
+    <DropDownWrapper ref={inputEl}>
+      <DropDownHeader onClick={() => { setOpen(!open) }}>
+        <HeaderTitle>{props.header}</HeaderTitle>
+        <Arrow open={open} />
       </DropDownHeader>
       <DropDownList open={open} count={props.items ? props.items.length : 0}>
         { props.items.map((item, i) => {
-          return ( 
-          <DropDownListItem key={`ddl-${i}`}  onClick={() => selectItem(item)}>
-            <ItemWrapper>
-              <ItemName>
-              {item.name}
-              </ItemName>
-              <ItemControlWrapper>
-              <ItemControlButton onClick={(e)=> {onEditClick(e,item)}}><FontAwesomeIcon icon={faEdit}/></ItemControlButton>
-              <ItemControlButton onClick={(e)=> {onDeleteClick(e,item.name)}}><FontAwesomeIcon icon={faTrash}/></ItemControlButton>
-              </ItemControlWrapper>
-            </ItemWrapper>
-          </DropDownListItem>)
+          return (
+            <DropDownListItem key={`ddl-${i}`} onClick={() => selectItem(item)}>
+              <ItemWrapper>
+                <ItemName>
+                  {item.name}
+                </ItemName>
+                <ItemControlWrapper>
+                  <ItemControlButton onClick={(e) => { onEditClick(e, item) }}><FontAwesomeIcon icon={faEdit} /></ItemControlButton>
+                  <ItemControlButton onClick={(e) => { onDeleteClick(e, item.name) }}><FontAwesomeIcon icon={faTrash} /></ItemControlButton>
+                </ItemControlWrapper>
+              </ItemWrapper>
+            </DropDownListItem>)
         })}
       </DropDownList>
-  
-  </DropDownWrapper>
-)
+
+    </DropDownWrapper>
+  )
 }
 
 export default TokenSelector

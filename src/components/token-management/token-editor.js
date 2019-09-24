@@ -45,9 +45,9 @@ height:44px;
 -moz-appearance: none;
 cursor: pointer;
 width:80px;
-color: ${props=> props.color ? props.color : '#000000' }
-background: ${props=> props.background};
-border: ${props=> props.border};
+color: ${props => props.color ? props.color : '#000000'}
+background: ${props => props.background};
+border: ${props => props.border};
 :focus{
   outline: none;
 } 
@@ -68,45 +68,43 @@ padding-top:20px;
 `
 
 const TokenEditor = (props) => {
+  const onTokenNameChange = (val) => {
+    props.onTokenChanged('name', val.target.value)
+  }
+  const onUserNameChange = (val) => {
+    props.onTokenChanged('userName', val.target.value)
+  }
+  const onTokenChange = (val) => {
+    props.onTokenChanged('value', val.target.value)
+  }
 
-const onTokenNameChange =(val) => {
-  props.onTokenChanged('name', val.target.value)
-}
-const onUserNameChange = (val) => {
-  props.onTokenChanged('userName', val.target.value)
-}
-const onTokenChange = (val) => {
-  props.onTokenChanged('value', val.target.value)
-}
-
-const onOwnerChange =(val) => {
-  props.onTokenChanged('owner', val.target.value)
-}
-  return(
+  const onOwnerChange = (val) => {
+    props.onTokenChanged('owner', val.target.value)
+  }
+  return (
     <ModalWrapper show={props.show}>
       <MainModal>
-      <ConfigRow>
+        <ConfigRow>
       GitHub API Configuration
-      </ConfigRow>
-        <ConfigRow>
-        <NameTextBox placeholder=' Token Name' onChange={onTokenNameChange} value={props.token.name}/>
         </ConfigRow>
         <ConfigRow>
-        <NameTextBox placeholder=' Owner' onChange={onOwnerChange} value={(props.token.owner||'')}/>
+          <NameTextBox placeholder=' Token Name' onChange={onTokenNameChange} value={props.token.name} />
         </ConfigRow>
         <ConfigRow>
-        <NameTextBox placeholder=' User Name' onChange={onUserNameChange} value={props.token.userName}/>
+          <NameTextBox placeholder=' Owner' onChange={onOwnerChange} value={(props.token.owner || '')} />
         </ConfigRow>
-       <TokenWrapper>
-        <NameTextBox placeholder=' Token' onChange={onTokenChange} value={props.token.value}/>
+        <ConfigRow>
+          <NameTextBox placeholder=' User Name' onChange={onUserNameChange} value={props.token.userName} />
+        </ConfigRow>
+        <TokenWrapper>
+          <NameTextBox placeholder=' Token' onChange={onTokenChange} value={props.token.value} />
         </TokenWrapper>
-       <ButtonWrapper>
-      <ConfigButton background='#ffffff' border='solid 1px #dfdfdf' onClick={props.onCancel}>CANCEL</ConfigButton>
-      <ConfigButton background='#6cc644' color='#ffffff' border='none' onClick={props.onSubmit}>SUBMIT</ConfigButton>
-      </ButtonWrapper>
+        <ButtonWrapper>
+          <ConfigButton background='#ffffff' border='solid 1px #dfdfdf' onClick={props.onCancel}>CANCEL</ConfigButton>
+          <ConfigButton background='#6cc644' color='#ffffff' border='none' onClick={props.onSubmit}>SUBMIT</ConfigButton>
+        </ButtonWrapper>
       </MainModal>
     </ModalWrapper>
   )
-
 }
 export default TokenEditor

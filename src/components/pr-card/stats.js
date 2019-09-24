@@ -33,12 +33,13 @@ const StatName = styled.div`
 const Stats = (props) => {
   return (
     <StatsWrapper>
-      { props.stats.map((stat, i) => {
+      {
+        props.stats.map((stat, i) => {
 	    return (
   <StatsContainer key={`stat-container-${i}`}>
-            <StatValue>{stat.value}</StatValue>
-            <StatName>{stat.name}</StatName>`
-          </StatsContainer>
+              <StatValue>{stat.value}</StatValue>
+              <StatName>{stat.name}</StatName>`
+            </StatsContainer>
 	    )
 	  })
       }
