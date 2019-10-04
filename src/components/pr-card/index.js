@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Card from './card'
 import Header from './header'
@@ -22,6 +23,12 @@ const PrCard = (props) => {
       { props.stats && <Stats stats={props.stats} /> }
     </Card>
   </CardLink>)
+}
+
+PrCard.prototypes = {
+  avatar: PropTypes.string,
+  name: PropTypes.string,
+  tats: PropTypes.instanceOf(Array)
 }
 
 export default PrCard

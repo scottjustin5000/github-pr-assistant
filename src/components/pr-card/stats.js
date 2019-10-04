@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StatsWrapper = styled.div`
@@ -33,18 +34,16 @@ const StatName = styled.div`
 const Stats = (props) => {
   return (
     <StatsWrapper>
-      {
-        props.stats.map((stat, i) => {
-	    return (
-  <StatsContainer key={`stat-container-${i}`}>
-              <StatValue>{stat.value}</StatValue>
-              <StatName>{stat.name}</StatName>`
-            </StatsContainer>
-	    )
-	  })
+      { props.stats.map((stat, i) => {
+        return (<StatsContainer key={`stat-container-${i}`}><StatValue>{stat.value}</StatValue><StatName>{stat.name}</StatName>` </StatsContainer>)
+      })
       }
     </StatsWrapper>
   )
+}
+
+Stats.prototypes = {
+  stats: PropTypes.instanceOf(Array)
 }
 
 export default Stats

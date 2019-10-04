@@ -121,7 +121,7 @@ const loadOrgPrStats = async (token, organization) => {
     return Promise.map(users, (user) => { return getUserStats(token, user, prUserHashMap[user.login]) }, { concurrency: 3 })
   })
     .then((results) => {
-      return (results || []).filter((f) => { return f.openPrs.length || f.reviewRequests.length })
+      return (results || []).filter((f) => { return f.openPrs.length || f.reviewRequests.length }).sort((a, b) => (a.reviewRequests.length < b.reviewRequests.length) ? 1 : (a.reviewRequests.length === b.reviewRequests.length) ? ((a.openPrs.length < b.openPrs.length) ? 1 : -1) : -1)
     })
 }
 

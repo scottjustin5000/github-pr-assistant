@@ -24,8 +24,14 @@ const AppWrapper = styled.div`
   line-height: 1.5em
 `
 
+const ListWrapper = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+flex-flow: wrap;
+`
 const App = () => {
-  const defaultToken = { name: '', userName: '', value: '' }
+  const defaultToken = { name: '', owner: '', userName: '', value: '' }
   const [selectedToken, setSelectedToken] = useState(defaultToken)
   const [items, setItems] = useState([])
   const [showEditor, setShowEditor] = useState(false)
@@ -45,6 +51,7 @@ const App = () => {
   }, [])
 
   const selectItem = async (item) => {
+    setSelectedToken(item)
     setLoading(true)
     const repos = await Github.loadOrgPrStats(item.value, item.owner)
     setLoading(false)
@@ -88,6 +95,13 @@ const App = () => {
     setItems(tokens)
   }
 
+  const refreshList = async () => {
+    setLoading(true)
+    const repos = await Github.loadOrgPrStats(selectedToken.value, selectedToken.owner)
+    setLoading(false)
+    setStats(repos)
+  }
+
   return (
 
     <AppWrapper>
@@ -111,9 +125,10 @@ const App = () => {
         onCancel={cancelEditor}
         onSubmit={saveToken} />
       { loading && <Loader /> }
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexFlow: 'wrap'}}>
-        <PrList stats={stats} />
-      </div>
+
+      <ListWrapper>
+        <PrList refresh={refreshList} stats={stats} />
+      </ListWrapper>
     </AppWrapper>)
 }
 export default App
