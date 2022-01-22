@@ -11,7 +11,7 @@
     "bluebird": "^3.5.5",
     "font-awesome": "^4.7.0",
     "keytar": "^4.4.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-fontawesome": "^1.6.1",
